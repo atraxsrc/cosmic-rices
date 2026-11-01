@@ -23,6 +23,10 @@ h1{font-size:clamp(34px,6vw,60px);line-height:1.02;letter-spacing:-.035em;margin
 .bar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;
 padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:28px;
 position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);z-index:5}
+.install{margin:24px 0 0;max-width:820px}
+.install code{display:block;overflow-x:auto;white-space:pre;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:13px var(--mono);color:var(--fg)}
+.install p{margin:8px 0 0;color:var(--dim);font-size:14px}
+.mono{font-family:var(--mono)}
 .count{font:13px var(--mono);color:var(--dim)}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--panel)}
 .seg button{all:unset;cursor:pointer;font:500 13px var(--mono);padding:6px 14px;border-radius:999px;color:var(--dim)}
@@ -138,6 +142,10 @@ def page(rices, owner, branch):
     <h1>COSMIC Rices</h1>
     <p class="lede">{len(pairs)} themes, each with a dark and a light half. One rice recolours the whole
     desktop: COSMIC itself, terminals, shell, editors, Firefox, Brave, GTK and Qt apps, cursors and wallpapers.</p>
+    <div class="install">
+      <code>curl -fsSL https://raw.githubusercontent.com/{owner}/themebox/master/install.sh | bash</code>
+      <p>Installs <a href="https://github.com/{owner}/themebox">themebox</a>. Then <span class="mono">themebox get noir</span> and <span class="mono">themebox switch noir</span>, using the name from any card, and flip dark and light from the panel.</p>
+    </div>
   </header>
   <div class="bar">
     <span class="count">{len(rices)} rices · {len(pairs)} pairs</span>
