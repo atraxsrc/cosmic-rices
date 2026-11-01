@@ -3,7 +3,6 @@ from html import escape as e
 
 EXTRAS = [
     ("cosmic-icon-themes", "Icon themes", "Recoloured Kanagawa icon packs, one per rice, in several folder colours."),
-    ("firefox-frosted-glass-cosmic", "Frosted glass Firefox", "A Firefox patch that lets COSMIC blur the desktop behind the window."),
 ]
 
 CSS = """
