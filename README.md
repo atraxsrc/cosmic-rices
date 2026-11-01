@@ -1,8 +1,10 @@
-# COSMIC Rices
+<h1 align="center">COSMIC Rices</h1>
 
 A gallery of every cosmic-*-theme rice for the COSMIC desktop on Pop!_OS: 14 themes, each with a dark and a light half.
 
 **[Open the gallery](https://atraxsrc.github.io/cosmic-rices/)**
+
+[![The gallery page with its install line and the first three rices](assets/gallery.jpg)](https://atraxsrc.github.io/cosmic-rices/)
 
 Each card shows a rice in its own colours, with its screenshot, palette and links to install it. Flip one card between its Night and Day halves, or switch every card at once. Click a swatch to copy its colour.
 
