@@ -2,6 +2,7 @@
 from html import escape as e
 
 EXTRAS = [
+    ("cosmic-rice", "cosmic-rice", "One command and a panel button to list, switch and flip between rices."),
     ("cosmic-icon-themes", "Icon themes", "Recoloured Kanagawa icon packs, one per rice, in several folder colours."),
 ]
 
