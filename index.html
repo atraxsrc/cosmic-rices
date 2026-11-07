@@ -55,7 +55,7 @@ box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c-fg) 22%,transparent);positi
 .links a{text-decoration:none;color:var(--c-accent)}
 .links a:hover{text-decoration:underline}
 .links .install-btn{all:unset;cursor:pointer;font-weight:600;color:var(--c-accent);border-radius:4px}
-.links .install-btn:hover{text-decoration:underline}
+.links .install-btn:hover,.links .install-btn:focus-visible{text-decoration:underline}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;
 background:var(--fg);color:var(--bg);font:500 13px var(--mono);padding:8px 14px;border-radius:999px;
 transition:all .2s ease;pointer-events:none;z-index:9}
