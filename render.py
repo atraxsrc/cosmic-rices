@@ -51,9 +51,11 @@ border:1px solid color-mix(in srgb,var(--c-fg) 30%,transparent);color:var(--c-fg
 .swatches button{all:unset;cursor:pointer;width:26px;height:26px;border-radius:7px;background:var(--s);
 box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c-fg) 22%,transparent);position:relative}
 .swatches button:hover,.swatches button:focus-visible{transform:translateY(-2px)}
-.links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:auto;font:500 13px var(--mono)}
+.links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:auto;font:500 13px var(--mono);align-items:center}
 .links a{text-decoration:none;color:var(--c-accent)}
 .links a:hover{text-decoration:underline}
+.links .install-btn{all:unset;cursor:pointer;font-weight:600;color:var(--c-accent);border-radius:4px}
+.links .install-btn:hover{text-decoration:underline}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;
 background:var(--fg);color:var(--bg);font:500 13px var(--mono);padding:8px 14px;border-radius:999px;
 transition:all .2s ease;pointer-events:none;z-index:9}
@@ -83,6 +85,9 @@ const toast=document.querySelector('.toast');let t;
 document.querySelectorAll('.swatches button').forEach(b=>b.addEventListener('click',async()=>{
 let msg=b.dataset.hex+' copied';try{await navigator.clipboard.writeText(b.dataset.hex)}catch(_){msg=b.dataset.hex}
 toast.textContent=msg;toast.classList.add('on');clearTimeout(t);t=setTimeout(()=>toast.classList.remove('on'),1400)}));
+document.querySelectorAll('.install-btn').forEach(b=>b.addEventListener('click',async()=>{
+let cmd=b.dataset.cmd;let msg='Install command copied';try{await navigator.clipboard.writeText(cmd)}catch(_){msg=cmd}
+toast.textContent=msg;toast.classList.add('on');clearTimeout(t);t=setTimeout(()=>toast.classList.remove('on'),1400)}));
 """
 
 
@@ -93,7 +98,13 @@ def half(r, other, owner, branch):
         f'<li><button type="button" style="--s:{p["hex"]}" data-hex="{p["hex"]}" '
         f'title="{e(p["role"])} {p["hex"]}" aria-label="Copy {e(p["role"])} {p["hex"]}"></button></li>'
         for p in r["palette"])
-    links = [f'<a href="{repo}">Repository</a>', f'<a href="{repo}#setup">Install</a>']
+    slug = r["repo"][7:-6] if r["repo"].startswith("cosmic-") and r["repo"].endswith("-theme") else r["repo"]
+    cmd = f"themebox get {slug} && themebox switch {slug}"
+    links = [
+        f'<a href="{repo}">Repository</a>',
+        f'<button type="button" class="install-btn" data-cmd="{e(cmd)}" '
+        f'title="{e(cmd)}" aria-label="Copy install command for {e(r["name"])}: {e(cmd)}">Install</button>',
+    ]
     if r["amo"]:
         links.append(f'<a href="{e(r["amo"])}">Firefox add-on</a>')
     flip = (f'<button type="button" class="flip" aria-label="Show {e(other["name"])}, the '
@@ -144,7 +155,7 @@ def page(rices, owner, branch):
     desktop: COSMIC itself, terminals, shell, editors, Firefox, Brave, GTK and Qt apps, cursors and wallpapers.</p>
     <div class="install">
       <code>curl -fsSL https://raw.githubusercontent.com/{owner}/themebox/master/install.sh | bash</code>
-      <p>Installs <a href="https://github.com/{owner}/themebox">themebox</a>. Then <span class="mono">themebox get noir</span> and <span class="mono">themebox switch noir</span>, using the name from any card, and flip dark and light from the panel.</p>
+      <p>Installs <a href="https://github.com/{owner}/themebox">themebox</a>. Then click <strong class="mono">Install</strong> on any card to copy its <span class="mono">themebox get</span> + <span class="mono">themebox switch</span> command, and flip dark and light from the panel.</p>
     </div>
   </header>
   <div class="bar">
@@ -160,7 +171,7 @@ def page(rices, owner, branch):
     <h3>Also for COSMIC</h3>
     <ul>{extras}</ul>
   </section>
-  <footer>Generated from the theme repositories. Click a swatch to copy its colour; click a screenshot for full size.</footer>
+  <footer>Generated from the theme repositories. Click a swatch to copy its colour; click Install to copy the themebox command; click a screenshot for full size.</footer>
 </div>
 <div class="toast" role="status" aria-live="polite"></div>
 <script>{JS}</script>
